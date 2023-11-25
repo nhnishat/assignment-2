@@ -8,7 +8,7 @@ export type TAddress = {
   country: string
 }
 
-export type TUser = {
+export type User = {
   userId: string
   username: string
   password: string
