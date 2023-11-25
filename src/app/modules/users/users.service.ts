@@ -1,8 +1,12 @@
-import { User } from './users.interface'
-import { UserModel } from './users.model'
+import { TUser } from './users.interface'
+import { User } from './users.model'
 
-const createUserDB = async (user: User) => {
-  const result = await UserModel.create(user)
+const createUserDB = async (userData: TUser) => {
+  const user = new User(userData)
+  if (await user.isUserExists(userData.userId)) {
+    throw new Error('User already exists!')
+  }
+  const result = await user.save()
   return result
 }
 
