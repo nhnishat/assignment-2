@@ -10,6 +10,12 @@ const createUserDB = async (userData: TUser) => {
   return result
 }
 
+const getAllUsers = async (userData: TUser) => {
+  const result = await User.find(userData)
+  return result
+}
+
 export const UserServices = {
   createUserDB,
+  getAllUsers,
 }

@@ -9,10 +9,12 @@ import {
 const fullNameSchema = new Schema<TFullName>({
   firstName: {
     type: String,
+    trim: true,
     required: true,
   },
   lastName: {
     type: String,
+    trim: true,
     required: true,
   },
 })
@@ -31,12 +33,12 @@ const addressSchema = new Schema<TAddress>({
   },
 })
 const UserSchema = new Schema<TUser, UserModel, UserMethods>({
-  userId: { type: Number, required: true },
-  username: { type: String, required: true },
+  userId: { type: Number, trim: true, required: true },
+  username: { type: String, trim: true, required: true },
   password: { type: String, required: true },
   fullName: fullNameSchema,
-  age: { type: String, required: true },
-  email: { type: String, required: true },
+  age: { type: String, trim: true, required: true },
+  email: { type: String, required: true, unique: true, lowercase: true },
   isActive: { type: Boolean, required: true },
   hobbies: [String],
   address: addressSchema,
