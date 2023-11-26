@@ -19,23 +19,81 @@ const createUser = async (req: Request, res: Response) => {
   }
 }
 
-const getUser = async (req: Request, res: Response) => {
+const allUser = async (req: Request, res: Response) => {
   try {
-    const result = await UserServices.getAllUsers
+    const result = await UserServices.getAllUsers()
     res.status(200).json({
       success: true,
-      message: 'user retain successfully',
+      message: 'user retrieved successfully',
       data: result,
     })
   } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error.message || 'something went wrong',
-      data: 'no data',
+      data: error,
     })
   }
 }
+
+const SingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const result = await UserServices.getSingleUser(userId)
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      })
+    }
+    res.status(200).json({
+      success: true,
+      message: 'user retrieved  successfully',
+      data: result,
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong',
+      error: error,
+    })
+  }
+}
+const deleteSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params
+    const result = await UserServices.deleteSingleUser(userId)
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      })
+    }
+    res.status(200).json({
+      success: true,
+      message: 'user delete  successfully',
+      data: result,
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong',
+      error: error,
+    })
+  }
+}
+
 export const UserController = {
   createUser,
-  getUser,
+  allUser,
+  SingleUser,
+  deleteSingleUser,
 }

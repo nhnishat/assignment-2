@@ -1,11 +1,5 @@
-import { Schema, model } from 'mongoose'
-import {
-  TAddress,
-  TFullName,
-  TUser,
-  UserMethods,
-  UserModel,
-} from './users.interface'
+import { Model, Schema, model } from 'mongoose'
+import { TAddress, TFullName, TUser } from './users.interface'
 const fullNameSchema = new Schema<TFullName>({
   firstName: {
     type: String,
@@ -32,8 +26,8 @@ const addressSchema = new Schema<TAddress>({
     required: true,
   },
 })
-const UserSchema = new Schema<TUser, UserModel, UserMethods>({
-  userId: { type: Number, trim: true, required: true },
+const UserSchema = new Schema<TUser, UserModel>({
+  userId: { type: String, trim: true, required: true },
   username: { type: String, trim: true, required: true },
   password: { type: String, required: true },
   fullName: fullNameSchema,
@@ -44,11 +38,13 @@ const UserSchema = new Schema<TUser, UserModel, UserMethods>({
   address: addressSchema,
 })
 
-//creating instance method
+export interface UserModel extends Model<TUser> {
+  isUserExists(userId: string): Promise<TUser | null>
+}
 
-UserSchema.methods.isUserExists = async function (userId: number) {
-  const existingUser = await User.findOne({ userId })
-  return existingUser
+UserSchema.statics.isUserExists = async function (userId: string) {
+  const isExistsUser = await User.findOne({ userId })
+  return isExistsUser
 }
 
 export const User = model<TUser, UserModel>('User', UserSchema)
