@@ -10,6 +10,12 @@ export type TAddress = {
   country: string
 }
 
+export type TOrder = {
+  productName: string
+  price: number
+  quantity: number
+}
+
 export type TUser = {
   userId: string
   username: string
@@ -20,9 +26,9 @@ export type TUser = {
   isActive: boolean
   hobbies: [string, string]
   address: TAddress
+  orders: TOrder
 }
 
-export interface UserMethods {
-  isUserExists(userId: number): Promise<TUser | null>
+export interface UserModel extends Model<TUser> {
+  isUserExists(userId: string): Promise<TUser | null>
 }
-export type UserModel = Model<TUser, Record<string, never>, UserMethods>

@@ -10,14 +10,30 @@ const createUserDB = async (userData: TUser) => {
 }
 
 const getAllUsers = async () => {
-  const result = await User.find()
+  const result = await User.find().select({
+    username: 1,
+    fullName: 1,
+    age: 1,
+    email: 1,
+    address: 1,
+  })
   return result
 }
 const getSingleUser = async (userId: string) => {
-  const result = await User.findOne({ userId })
+  const result = await User.findOne({ userId }).select({
+    username: 1,
+    fullName: 1,
+    age: 1,
+    email: 1,
+    address: 1,
+  })
+  console.log(result)
   return result
 }
-
+const updateSingleUser = async (userId: string, updateData: TUser) => {
+  const result = await User.updateOne({ userId }, { $set: updateData })
+  return result
+}
 const deleteSingleUser = async (userId: string) => {
   const result = await User.deleteOne({ userId })
   return result
