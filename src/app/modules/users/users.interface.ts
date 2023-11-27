@@ -10,11 +10,13 @@ export type TAddress = {
   country: string
 }
 
-export type TOrder = {
-  productName: string
-  price: number
-  quantity: number
-}
+export type TOrder = [
+  {
+    productName: string
+    price: number
+    quantity: number
+  },
+]
 
 export type TUser = {
   userId: string

@@ -39,10 +39,73 @@ const deleteSingleUser = async (userId: string) => {
   return result
 }
 
+const updateASingleUsersOrders = async (userId: string, updateData: TUser) => {
+  const result = await User.updateOne(
+    { userId },
+    { $push: { orders: updateData } },
+  )
+  console.log({ result })
+  return result
+}
+
+const getSingleUserOrders = async (userId: string) => {
+  const result = await User.aggregate([
+    {
+      $match: {
+        userId: userId,
+      },
+    },
+    {
+      $project: {
+        orders: {
+          productName: 1,
+          price: 1,
+          quantity: 1,
+        },
+      },
+    },
+  ])
+  console.log({ result })
+  return result
+}
+const getSingleUserOrdersPrice = async (userId: string) => {
+  const result = await User.aggregate([
+    {
+      $match: {
+        userId: userId,
+      },
+    },
+    {
+      $unwind: '$orders',
+    },
+    {
+      $group: {
+        _id: null,
+        totalPrice: {
+          $sum: { $multiply: ['$orders.price', '$orders.quantity'] },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        totalPrice: 1,
+      },
+    },
+  ])
+
+  const totalPrice = parseInt(result[0]?.totalPrice || 0)
+  console.log({ totalPrice })
+  return totalPrice
+}
+
 export const UserServices = {
   createUserDB,
   getAllUsers,
   getSingleUser,
   deleteSingleUser,
   updateSingleUser,
+  updateASingleUsersOrders,
+  getSingleUserOrders,
+  getSingleUserOrdersPrice,
 }

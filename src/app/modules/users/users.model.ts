@@ -32,20 +32,22 @@ const addressSchema = new Schema<TAddress>({
     required: true,
   },
 })
-const orderSchema = new Schema<TOrder>({
-  productName: {
-    type: String,
-    required: true,
+const orderSchema = new Schema<TOrder>([
+  {
+    productName: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-})
+])
 const UserSchema = new Schema<TUser, UserModel>({
   userId: { type: String, trim: true, required: true },
   username: { type: String, trim: true, required: true },
