@@ -12,18 +12,41 @@
 git clone exmaple:https://github.com/your-username/assignment.git
 ```
 
-## Navigate to the project directory: cd assignment
+2. Navigate to the project directory:
 
-## Install dependencies: npm install
+```bash
+  cd assignment
+```
 
-## To run the project in development mode: npm run start:dev
+3. Install dependencies:
 
-## To build and run the project in production mode: npm run build || npm run start:prod
+```bash
+  npm install
+```
 
-## Run ESLint: npm run lint
+4. To run the project in development mode:
 
-## Auto-fix ESLint issues: npm run lint:fix
+```bash
+ npm run start:dev
+```
 
-## Run Prettier: npm run format
+5. To build and run the project in production mode:
 
-## Auto-fix Prettier formatting: npm run prettier:fix
+```bash
+  npm run build
+  npm run start:prod
+```
+
+6. Run ESLint and Auto-fix ESLint issues:
+
+```bash
+ npm run lint
+ npm run lint:fix
+```
+
+7. Run Prettier and Auto-fix Prettier formatting:
+
+```bash
+  npm run format
+ npm run prettier:fix
+```
