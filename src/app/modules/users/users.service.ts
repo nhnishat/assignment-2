@@ -94,7 +94,7 @@ const getSingleUserOrdersPrice = async (userId: string) => {
     },
   ])
 
-  const totalPrice = parseInt(result[0]?.totalPrice || 0)
+  const totalPrice = parseInt(result[0]?.totalPrice || null)
   console.log({ totalPrice })
   return totalPrice
 }
