@@ -12,63 +12,74 @@ const fullNameSchema = new Schema<TFullName>({
   firstName: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, 'First Name is required'],
   },
   lastName: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, 'Last Name is required'],
   },
 })
 const addressSchema = new Schema<TAddress>({
   street: {
     type: String,
-    required: true,
+    required: [true, 'Address is required'],
   },
   city: {
     type: String,
-    required: true,
+    required: [true, 'City is required'],
   },
   country: {
     type: String,
-    required: true,
+    required: [true, 'Country is required'],
   },
 })
 const orderSchema = new Schema<TOrder>([
   {
     productName: {
       type: String,
-      required: true,
+      required: [true, 'Product address is required'],
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, 'Price is required'],
     },
     quantity: {
       type: Number,
-      required: true,
+      required: [true, 'Quantity is required'],
     },
   },
 ])
 const UserSchema = new Schema<TUser, UserModel>({
-  userId: { type: String, trim: true, required: true },
-  username: { type: String, trim: true, required: true },
-  password: { type: String, required: true },
+  userId: {
+    type: String,
+    trim: true,
+    required: [true, 'userId is required'],
+  },
+  username: {
+    type: String,
+    trim: true,
+    required: [true, 'User Name is required'],
+  },
+  password: { type: String, required: [true, 'Password is required'] },
   fullName: fullNameSchema,
-  age: { type: String, trim: true, required: true },
-  email: { type: String, required: true, unique: true, lowercase: true },
-  isActive: { type: Boolean, required: true },
-  hobbies: [String],
+  age: { type: String, trim: true, required: [true, 'Age is required'] },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    unique: true,
+    lowercase: true,
+  },
+  isActive: { type: Boolean, required: [true, 'isActive is required'] },
+  hobbies: [String, [true, 'Hobbies is required']],
   address: addressSchema,
   orders: orderSchema,
 })
 
 UserSchema.pre('save', async function (next) {
   const user = this
-  if (this.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 10)
-    this.password = undefined as unknown as string
-  }
+  user.password = await bcrypt.hash(user.password, 10)
+  next()
 })
 
 UserSchema.methods.toJSON = function () {

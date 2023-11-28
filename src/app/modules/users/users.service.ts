@@ -1,6 +1,8 @@
 import { TUser } from './users.interface'
 import { User } from './users.model'
 
+// Create a new user
+
 const createUserDB = async (userData: TUser) => {
   if (await User.isUserExists(userData.userId)) {
     throw new Error('User already exists!')
@@ -8,6 +10,8 @@ const createUserDB = async (userData: TUser) => {
   const result = await User.create(userData)
   return result
 }
+
+// Get all users
 
 const getAllUsers = async () => {
   const result = await User.find().select({
@@ -19,6 +23,9 @@ const getAllUsers = async () => {
   })
   return result
 }
+
+// Get a single user by userId
+
 const getSingleUser = async (userId: string) => {
   const result = await User.findOne({ userId }).select({
     username: 1,
@@ -27,26 +34,32 @@ const getSingleUser = async (userId: string) => {
     email: 1,
     address: 1,
   })
-  console.log(result)
   return result
 }
+
+// Update a single user by userId
 const updateSingleUser = async (userId: string, updateData: TUser) => {
   const result = await User.updateOne({ userId }, { $set: updateData })
   return result
 }
+
+// Delete a single user by userId
 const deleteSingleUser = async (userId: string) => {
   const result = await User.deleteOne({ userId })
   return result
 }
+
+// Update a single user's orders by userId
 
 const updateASingleUsersOrders = async (userId: string, updateData: TUser) => {
   const result = await User.updateOne(
     { userId },
     { $push: { orders: updateData } },
   )
-  console.log({ result })
   return result
 }
+
+// Get a single user's orders by userId
 
 const getSingleUserOrders = async (userId: string) => {
   const result = await User.aggregate([
@@ -65,9 +78,10 @@ const getSingleUserOrders = async (userId: string) => {
       },
     },
   ])
-  console.log({ result })
   return result
 }
+
+// Get the total price of a single user's orders by userId
 const getSingleUserOrdersPrice = async (userId: string) => {
   const result = await User.aggregate([
     {
@@ -95,7 +109,6 @@ const getSingleUserOrdersPrice = async (userId: string) => {
   ])
 
   const totalPrice = parseInt(result[0]?.totalPrice || null)
-  console.log({ totalPrice })
   return totalPrice
 }
 

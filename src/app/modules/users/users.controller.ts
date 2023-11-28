@@ -119,7 +119,6 @@ const updateSingleUsersOrders = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId
     const updateData = req.body
-    console.log(userId, updateData)
     const result = await UserServices.updateASingleUsersOrders(
       userId,
       updateData,

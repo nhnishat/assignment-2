@@ -26,7 +26,7 @@ export type TUser = {
   age: string
   email: string
   isActive: boolean
-  hobbies: [string, string]
+  hobbies: string
   address: TAddress
   orders: TOrder
 }
