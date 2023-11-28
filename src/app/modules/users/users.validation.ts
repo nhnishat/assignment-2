@@ -27,8 +27,13 @@ const AddressSchema = z.object({
   city: z.string().min(1, { message: 'City must not be empty' }),
   country: z.string().min(1, { message: 'Country must not be empty' }),
 })
+const orderSchema = z.object({
+  productName: z.string().min(1, { message: 'Country must not be empty' }),
+  price: z.number().min(1, { message: 'Country must not be empty' }),
+  quantity: z.number().min(1, { message: 'Country must not be empty' }),
+})
 
-const UserSchema = z.object({
+const validationUserSchema = z.object({
   userId: z.string().min(1, { message: 'User ID must not be empty' }),
   username: z.string().min(1, { message: 'Username must not be empty' }),
   password: z.string().min(1, { message: 'Password must not be empty' }),
@@ -38,4 +43,6 @@ const UserSchema = z.object({
   isActive: z.boolean(),
   hobbies: z.tuple([z.string(), z.string()]),
   address: AddressSchema,
+  orders: orderSchema,
 })
+export default validationUserSchema
