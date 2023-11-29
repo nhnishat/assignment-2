@@ -83,7 +83,7 @@ const deleteSingleUser = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'User deleted successfully',
-      data: result,
+      data: null,
     })
   } catch (error) {
     res.status(500).json({
@@ -100,6 +100,16 @@ const updateSingleUser = async (req: Request, res: Response) => {
     const { userId } = req.params
     const updateData = req.body
     const result = await UserServices.updateSingleUser(userId, updateData)
+    if (result === null) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+        error: {
+          code: 404,
+          description: 'User not found!',
+        },
+      })
+    }
     res.status(200).json({
       success: true,
       message: 'User updated successfully',

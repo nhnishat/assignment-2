@@ -40,7 +40,7 @@ const getSingleUser = async (userId: string) => {
 // Update a single user by userId
 const updateSingleUser = async (userId: string, updateData: TUser) => {
   const result = await User.updateOne({ userId }, { $set: updateData })
-  return result
+  return result.modifiedCount > 0 ? result : null
 }
 
 // Delete a single user by userId

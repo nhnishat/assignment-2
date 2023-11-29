@@ -1,10 +1,10 @@
-# Project Name: assignment
+# Project Name: Level-2 assignment
 
 ## Description
 
-# This is a TypeScript project using Express, Mongoose, and Zod.
+## This is a TypeScript project using Express, Mongoose, and Zod.
 
-## Installation
+## Installation and instruction
 
 1. Clone the repository:
 
@@ -47,6 +47,6 @@ git clone exmaple:https://github.com/your-username/assignment.git
 7. Run Prettier and Auto-fix Prettier formatting:
 
 ```bash
-  npm run format
+ npm run format
  npm run prettier:fix
 ```
