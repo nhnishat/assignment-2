@@ -4,6 +4,8 @@
 
 ## This is a TypeScript project using Express, Mongoose, and Zod.
 
+### vercel_host_link:- https://assingment1-5g45vuefd-nhnishat.vercel.app/
+
 ## Run development Command path
 
 1. Create user using post
