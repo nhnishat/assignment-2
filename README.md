@@ -4,56 +4,56 @@
 
 ## This is a TypeScript project using Express, Mongoose, and Zod.
 
-### vercel_host_link:- https://assingment1-5g45vuefd-nhnishat.vercel.app/
+### vercel_host_link:- https://assingment2-iota.vercel.app/
 
 ## Run development Command path
 
 1. Create user using post
 
 ```bash
-post http://localhost:5000/api/users
+post https://assingment2-iota.vercel.app/api/users
 ```
 
 2. Get all users using get method
 
 ```bash
-get http://localhost:5000/api/users
+get https://assingment2-iota.vercel.app/api/users
 ```
 
 3. Get specific a user using get method
 
 ```bash
-get http://localhost:5000/api/users/:userId
+get https://assingment2-iota.vercel.app/api/users/:userId
 ```
 
 4. update specific a user using put method
 
 ```bash
-put http://localhost:5000/api/users/:userId
+put https://assingment2-iota.vercel.app/api/users/:userId
 ```
 
 4. Delete a specific user using delete method
 
 ```bash
-delete http://localhost:5000/api/users/:userId
+delete https://assingment2-iota.vercel.app/api/users/:userId
 ```
 
 4. Specific a user add new product in Order using put method
 
 ```bash
-put http://localhost:5000/api/users/:userId/orders
+put https://assingment2-iota.vercel.app/api/users/:userId/orders
 ```
 
 4. Retrieve all orders for a specific user
 
 ```bash
-Get http://localhost:5000/api/users/:userId/orders
+Get https://assingment2-iota.vercel.app/api/users/:userId/orders
 ```
 
 4. Calculate Total Price of Orders for a Specific User
 
 ```bash
-Get http://localhost:5000/api/users/:userId/orders/total-price
+Get https://assingment2-iota.vercel.app/api/users/:userId/orders/total-price
 ```
 
 ## Installation and instruction
