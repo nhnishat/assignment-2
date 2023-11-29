@@ -40,7 +40,7 @@ const allUser = async (req: Request, res: Response) => {
 // Get a single user by userId
 const SingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params
+    const userId = Number(req.params.userId)
     const result = await UserServices.getSingleUser(userId)
     if (!result) {
       return res.status(404).json({
@@ -68,7 +68,7 @@ const SingleUser = async (req: Request, res: Response) => {
 // Delete a single user by userId
 const deleteSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params
+    const userId = Number(req.params.userId)
     const result = await UserServices.deleteSingleUser(userId)
     if (!result) {
       return res.status(404).json({
@@ -97,7 +97,7 @@ const deleteSingleUser = async (req: Request, res: Response) => {
 // Update a single user by userId
 const updateSingleUser = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params
+    const userId = Number(req.params.userId)
     const updateData = req.body
     const result = await UserServices.updateSingleUser(userId, updateData)
     if (result === null) {
@@ -127,7 +127,7 @@ const updateSingleUser = async (req: Request, res: Response) => {
 // Update a single user's orders by userId
 const updateSingleUsersOrders = async (req: Request, res: Response) => {
   try {
-    const userId = req.params.userId
+    const userId = Number(req.params.userId)
     const updateData = req.body
     const result = await UserServices.updateASingleUsersOrders(
       userId,
@@ -150,7 +150,7 @@ const updateSingleUsersOrders = async (req: Request, res: Response) => {
 // Get a single user's orders by userId
 const SingleUserOrders = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params
+    const userId = Number(req.params.userId)
     const result = await UserServices.getSingleUserOrders(userId)
     res.status(200).json({
       success: true,
@@ -169,7 +169,7 @@ const SingleUserOrders = async (req: Request, res: Response) => {
 // Get the total price of a single user's orders by userId
 const SingleUserOrdersPrice = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params
+    const userId = Number(req.params.userId)
     const result = await UserServices.getSingleUserOrdersPrice(userId)
     res.status(200).json({
       success: true,

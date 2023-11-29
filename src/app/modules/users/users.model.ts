@@ -52,7 +52,7 @@ const orderSchema = new Schema<TOrder>([
 ])
 const UserSchema = new Schema<TUser, UserModel>({
   userId: {
-    type: String,
+    type: Number,
     trim: true,
     required: [true, 'userId is required'],
   },

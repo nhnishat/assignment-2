@@ -4,7 +4,7 @@ import { User } from './users.model'
 // Create a new user
 
 const createUserDB = async (userData: TUser) => {
-  if (await User.isUserExists(userData.userId)) {
+  if (await User.isUserExists(userData.userId.toString())) {
     throw new Error('User already exists!')
   }
   const result = await User.create(userData)
@@ -26,7 +26,7 @@ const getAllUsers = async () => {
 
 // Get a single user by userId
 
-const getSingleUser = async (userId: string) => {
+const getSingleUser = async (userId: number) => {
   const result = await User.findOne({ userId }).select({
     username: 1,
     fullName: 1,
@@ -38,20 +38,20 @@ const getSingleUser = async (userId: string) => {
 }
 
 // Update a single user by userId
-const updateSingleUser = async (userId: string, updateData: TUser) => {
+const updateSingleUser = async (userId: number, updateData: TUser) => {
   const result = await User.updateOne({ userId }, { $set: updateData })
   return result.modifiedCount > 0 ? result : null
 }
 
 // Delete a single user by userId
-const deleteSingleUser = async (userId: string) => {
+const deleteSingleUser = async (userId: number) => {
   const result = await User.deleteOne({ userId })
   return result
 }
 
 // Update a single user's orders by userId
 
-const updateASingleUsersOrders = async (userId: string, updateData: TUser) => {
+const updateASingleUsersOrders = async (userId: number, updateData: TUser) => {
   const result = await User.updateOne(
     { userId },
     { $push: { orders: updateData } },
@@ -61,7 +61,7 @@ const updateASingleUsersOrders = async (userId: string, updateData: TUser) => {
 
 // Get a single user's orders by userId
 
-const getSingleUserOrders = async (userId: string) => {
+const getSingleUserOrders = async (userId: number) => {
   const result = await User.aggregate([
     {
       $match: {
@@ -82,7 +82,7 @@ const getSingleUserOrders = async (userId: string) => {
 }
 
 // Get the total price of a single user's orders by userId
-const getSingleUserOrdersPrice = async (userId: string) => {
+const getSingleUserOrdersPrice = async (userId: number) => {
   const result = await User.aggregate([
     {
       $match: {

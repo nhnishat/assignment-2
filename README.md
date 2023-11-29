@@ -20,28 +20,28 @@ post http://localhost:5000/api/users
 get http://localhost:5000/api/users
 ```
 
-3. Get A single users using get method
+3. Get specific a user using get method
 
 ```bash
 get http://localhost:5000/api/users/:userId
 ```
 
-4. update A single users using put method
+4. update specific a user using put method
 
 ```bash
 put http://localhost:5000/api/users/:userId
 ```
 
-4. Delete A single users using delete method
+4. Delete a specific user using delete method
 
 ```bash
 delete http://localhost:5000/api/users/:userId
 ```
 
-4. Add New Product in Order using put method
+4. Specific a user add new product in Order using put method
 
 ```bash
-delete http://localhost:5000/api/users/:userId/orders
+put http://localhost:5000/api/users/:userId/orders
 ```
 
 4. Retrieve all orders for a specific user

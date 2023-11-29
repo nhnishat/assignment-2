@@ -34,7 +34,7 @@ const orderSchema = z.object({
 })
 
 const validationUserSchema = z.object({
-  userId: z.string().min(1, { message: 'User ID must not be empty' }),
+  userId: z.number().min(1, { message: 'User ID must not be empty' }),
   username: z.string().min(1, { message: 'Username must not be empty' }),
   password: z.string().min(1, { message: 'Password must not be empty' }),
   fullName: FullNameSchema,
