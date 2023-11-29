@@ -9,6 +9,6 @@ app.use(cors())
 app.use('/api', UserRouter)
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello developers!')
+  res.send('Hello Users App is running')
 })
 export default app
